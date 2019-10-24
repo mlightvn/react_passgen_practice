@@ -1,10 +1,10 @@
 import React from 'react'
 import Password from './Password'
 
-export default function PasswordList({ passwords, togglePassword }) {
+export default function PasswordList({ passwords, togglePassword, handleRemovePassword }) {
 
 	const rows = passwords.map(password => {
-	  return <Password key={password.id} togglePassword={togglePassword} password={password} />
+	  return <Password key={password.id} togglePassword={togglePassword} password={password} handleRemovePassword={handleRemovePassword} />
 	})
 
 	return (
@@ -13,6 +13,7 @@ export default function PasswordList({ passwords, togglePassword }) {
 				<tr>
 					<th>uuid</th>
 					<th>Password</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>

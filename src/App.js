@@ -19,6 +19,11 @@ function App() {
     passwordRef.current.value = ""
   }
 
+  function handleRemovePassword(id) {
+    const newPasswords = passwords.filter(password => password.id != id)
+    setPassword(newPasswords)
+  }
+
   return (
     <>
       <header>
@@ -32,7 +37,7 @@ function App() {
             <div className="card-header">Password List
             </div>
             <div className="card-body">
-              <PasswordList passwords={passwords} />
+              <PasswordList passwords={passwords} handleRemovePassword={handleRemovePassword} />
             </div>
             <div className="card-footer">
               <PasswordForm passwords={passwords} passwordRef={passwordRef} handleAddPassword={handleAddPassword} />
