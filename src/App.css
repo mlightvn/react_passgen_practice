@@ -1,0 +1,32 @@
+body{
+  background-color: #EEEEEE;
+}
+
+header{
+  background-color: #FFFFFF;
+  box-shadow: 1px 2px 18px rgba(0,0,0,.1);
+  height: 50px;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  background: #fff;
+  box-shadow: 1px 2px 18px rgba(0,0,0,.1);
+  height: 50px;
+}
+
+main{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+footer{
+  background-color: #DDDDDD;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
