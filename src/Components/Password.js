@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Password({ password, togglePassword, handleRemovePassword }) {
+export default function Password({ password, togglePassword, handleEditPassword, handleRemovePassword }) {
   function handleEditClick() {
-    // handleRemovePassword(password.id)
+    handleEditPassword(password.id)
   }
 
   function handleRemoveClick() {

@@ -6,21 +6,47 @@ import PasswordForm from "./Components/PasswordForm";
 
 function App() {
   const [passwords, setPassword] = useState([])
-  const passwordRef = useRef()
+  const passwordIdRef = useRef()
+  const passwordValueRef = useRef()
 
   function handleAddPassword(e) {
-    const value = passwordRef.current.value
+    let id = passwordIdRef.current.value
+    let value = passwordValueRef.current.value
     if (value === '') return
 
-    setPassword(originalPasswords => {
-      return [...originalPasswords, { id: uuidv4(), value: value}]
-    })
+    if (id === ''){
+      setPassword(originalPasswords => {
+        return [...originalPasswords, { id: uuidv4(), value: value}]
+      })
+    }else{
 
-    passwordRef.current.value = ""
+      setPassword(originalPasswords => {
+        let list = originalPasswords.map(item => {
+            if(item.id === id){
+              item.value = value
+            }
+            return item;
+          })
+
+        return list
+      })
+
+    }
+
+    passwordIdRef.current.value = ''
+    passwordValueRef.current.value = ''
+  }
+
+  function handleEditPassword(id) {
+    const list = [...passwords]
+    const password = list.find(password => password.id === id)
+
+    passwordIdRef.current.value = password.id
+    passwordValueRef.current.value = password.value
   }
 
   function handleRemovePassword(id) {
-    const newPasswords = passwords.filter(password => password.id != id)
+    const newPasswords = passwords.filter(password => password.id !== id)
     setPassword(newPasswords)
   }
 
@@ -37,10 +63,10 @@ function App() {
             <div className="card-header">Password List
             </div>
             <div className="card-body">
-              <PasswordList passwords={passwords} handleRemovePassword={handleRemovePassword} />
+              <PasswordList passwords={passwords} handleRemovePassword={handleRemovePassword} handleEditPassword={handleEditPassword} />
             </div>
             <div className="card-footer">
-              <PasswordForm passwords={passwords} passwordRef={passwordRef} handleAddPassword={handleAddPassword} />
+              <PasswordForm passwords={passwords} passwordValueRef={passwordValueRef} passwordIdRef={passwordIdRef} handleAddPassword={handleAddPassword} />
             </div>
           </div>
         </div>

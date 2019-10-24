@@ -1,10 +1,10 @@
 import React from 'react'
 import Password from './Password'
 
-export default function PasswordList({ passwords, togglePassword, handleRemovePassword }) {
+export default function PasswordList({ passwords, togglePassword, handleEditPassword, handleRemovePassword }) {
 
 	const rows = passwords.map(password => {
-	  return <Password key={password.id} togglePassword={togglePassword} password={password} handleRemovePassword={handleRemovePassword} />
+	  return <Password key={password.id} togglePassword={togglePassword} password={password} handleRemovePassword={handleRemovePassword} handleEditPassword={handleEditPassword} />
 	})
 
 	return (
