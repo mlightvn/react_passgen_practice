@@ -13,6 +13,7 @@ class PasswordForm extends Component {
 
     this.state = {...this.initialState}
     this.handleAddPassword = props.handleAddPassword.bind(this)
+    this.handleGeneratePassword = props.handleGeneratePassword.bind(this)
 
   }
 
@@ -34,7 +35,8 @@ class PasswordForm extends Component {
                 ref={this.props.passwordValueRef}
               />
               <div className="input-group-append">
-                <button type="button" onClick={this.handleAddPassword} className="btn btn-primary"><i className="fas fa-plus"></i></button>
+                <button type="button" onClick={this.handleGeneratePassword} className="btn btn-outline-success"><i className="fas fa-fingerprint"></i></button>
+                <button type="button" onClick={this.handleAddPassword} className="btn btn-outline-primary"><i className="fas fa-plus"></i></button>
               </div>
             </div>
           </div>

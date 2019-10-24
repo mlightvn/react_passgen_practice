@@ -50,6 +50,19 @@ function App() {
     setPassword(newPasswords)
   }
 
+  function handleGeneratePassword() {
+    // https://www.npmjs.com/package/generate-password
+    var generator = require('generate-password');
+    var password = generator.generate({
+        length: 12,
+        numbers: true,
+        uppercase: true,
+        symbols: true,
+    });
+
+    passwordValueRef.current.value = password
+  }
+
   return (
     <>
       <header>
@@ -66,7 +79,7 @@ function App() {
               <PasswordList passwords={passwords} handleRemovePassword={handleRemovePassword} handleEditPassword={handleEditPassword} />
             </div>
             <div className="card-footer">
-              <PasswordForm passwords={passwords} passwordValueRef={passwordValueRef} passwordIdRef={passwordIdRef} handleAddPassword={handleAddPassword} />
+              <PasswordForm passwords={passwords} passwordValueRef={passwordValueRef} passwordIdRef={passwordIdRef} handleAddPassword={handleAddPassword} handleGeneratePassword={handleGeneratePassword} />
             </div>
           </div>
         </div>
