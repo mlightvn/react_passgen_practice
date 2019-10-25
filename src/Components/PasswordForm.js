@@ -18,7 +18,7 @@ class PasswordForm extends Component {
   }
 
   render() {
-    let { password } = this.state;
+    // let { password } = this.state;
 
     return (
       <>

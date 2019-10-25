@@ -8,7 +8,8 @@ class PasswordModal extends Component {
       password : {
         id: '',
         value: '',
-      }
+      },
+      isModalShowed : false,
     }
 
     this.state = {...this.initialState}
@@ -25,7 +26,7 @@ class PasswordModal extends Component {
   }
 
   render() {
-    let { password } = this.state;
+    // let { password, isModalShowed } = this.state;
 
     return (
       <>

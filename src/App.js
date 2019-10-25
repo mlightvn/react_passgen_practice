@@ -4,11 +4,25 @@ import uuidv4 from 'uuid/v4'
 import PasswordList from "./Components/PasswordList";
 import PasswordForm from "./Components/PasswordForm";
 import PasswordModal from "./Components/PasswordModal";
+// import Modal from 'react-bootstrap/Modal'
 
 function App() {
-  const [passwords, setPassword] = useState([])
+  const [passwords, setPassword, isModalShowed] = useState([])
   const passwordIdRef = useRef()
   const passwordValueRef = useRef()
+
+  // constructor(props) {
+  //   super(props);
+
+  //   // this.addWorkLog = this.addWorkLog.bind(this);
+  //   // this.onOpenModal = this.onOpenModal.bind(this);
+  //   // this.onCloseModal = this.onCloseModal.bind(this);
+  //   // this.state = {
+  //   //      open:true
+  //   //    };
+  //   this.state.isModalShowed = false
+
+  // }
 
   function handleAddPassword(e) {
     let id = passwordIdRef.current.value
@@ -96,7 +110,7 @@ function App() {
           </div>
         </div>
 
-        <PasswordModal passwords={passwords} passwordValueRef={passwordValueRef} passwordIdRef={passwordIdRef} handleAddPassword={handleAddPassword} handleGeneratePassword={handleGeneratePassword} />
+        <PasswordModal passwords={passwords} passwordValueRef={passwordValueRef} passwordIdRef={passwordIdRef} handleAddPassword={handleAddPassword} handleGeneratePassword={handleGeneratePassword} isModalShowed={isModalShowed} />
 
       </main>
       <footer>
