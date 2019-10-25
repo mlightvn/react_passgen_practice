@@ -3,6 +3,7 @@ import './App.css';
 import uuidv4 from 'uuid/v4'
 import PasswordList from "./Components/PasswordList";
 import PasswordForm from "./Components/PasswordForm";
+import PasswordModal from "./Components/PasswordModal";
 
 function App() {
   const [passwords, setPassword] = useState([])
@@ -73,16 +74,30 @@ function App() {
       <main className="App">
         <div className="container">
           <div className="card">
-            <div className="card-header">Password List
+            <div className="card-header">
+              <div className="row">
+                <div className="col-md-9">
+                  Password List
+                </div>
+                <div className="col-md-3 text-right">
+                  <button type="button" className="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#modalPassword"><i className="fas fa-plus"></i></button>
+                </div>
+              </div>
             </div>
             <div className="card-body">
               <PasswordList passwords={passwords} handleRemovePassword={handleRemovePassword} handleEditPassword={handleEditPassword} />
             </div>
+{/*
             <div className="card-footer">
               <PasswordForm passwords={passwords} passwordValueRef={passwordValueRef} passwordIdRef={passwordIdRef} handleAddPassword={handleAddPassword} handleGeneratePassword={handleGeneratePassword} />
             </div>
+*/}
+
           </div>
         </div>
+
+        <PasswordModal passwords={passwords} passwordValueRef={passwordValueRef} passwordIdRef={passwordIdRef} handleAddPassword={handleAddPassword} handleGeneratePassword={handleGeneratePassword} />
+
       </main>
       <footer>
         <div className="container">
