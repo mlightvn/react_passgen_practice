@@ -14,7 +14,9 @@ export default function Password({ password, togglePassword, handleEditPassword,
   return (
     <tr>
     	<td>{password.id}</td>
-    	<td>{password.value}</td>
+      <td>{password.value}</td>
+    	<td>{password.htpasswd}</td>
+
     	<td>
     		<button type="button" onClick={handleEditClick} className="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalPassword"><i className="fas fa-pencil-alt"></i></button>
     		&nbsp;

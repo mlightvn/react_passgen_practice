@@ -8,6 +8,7 @@ class PasswordModal extends Component {
       password : {
         id: '',
         value: '',
+        htpasswd: '',
       },
       isModalShowed : false,
     }

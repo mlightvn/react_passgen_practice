@@ -13,6 +13,7 @@ export default function PasswordList({ passwords, togglePassword, handleEditPass
 				<tr>
 					<th>uuid</th>
 					<th>Password</th>
+					<th>htpasswd</th>
 					<th></th>
 				</tr>
 			</thead>

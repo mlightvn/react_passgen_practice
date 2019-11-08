@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import uuidv4 from 'uuid/v4'
 import PasswordList from "./Components/PasswordList";
-import PasswordForm from "./Components/PasswordForm";
+// import PasswordForm from "./Components/PasswordForm";
 import PasswordModal from "./Components/PasswordModal";
 // import Modal from 'react-bootstrap/Modal'
 
@@ -10,6 +10,9 @@ function App() {
   const [passwords, setPassword, isModalShowed] = useState([])
   const passwordIdRef = useRef()
   const passwordValueRef = useRef()
+
+  const {log} = console
+
 
   // constructor(props) {
   //   super(props);
@@ -30,8 +33,10 @@ function App() {
     if (value === '') return
 
     if (id === ''){
+      let htpasswd = generateHtpasswd()
+
       setPassword(originalPasswords => {
-        return [...originalPasswords, { id: uuidv4(), value: value}]
+        return [...originalPasswords, { id: uuidv4(), value: value, htpasswd: htpasswd}]
       })
     }else{
 
@@ -76,6 +81,18 @@ function App() {
     });
 
     passwordValueRef.current.value = password
+  }
+
+  function generateHtpasswd() {
+    // https://www.npmjs.com/package/object-hash
+    let hash = require('object-hash');
+
+    let password = passwordValueRef.current.value
+
+    let htpasswd = hash(password, { algorithm: 'md5', encoding: 'base64' })
+
+    return htpasswd;
+
   }
 
   return (
