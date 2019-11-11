@@ -100,7 +100,7 @@ function App() {
 
     let password = passwordValueRef.current.value
 
-    let htpasswd = md5(password, "")
+    let htpasswd = md5(password)
 
     return htpasswd;
 
