@@ -84,12 +84,23 @@ function App() {
   }
 
   function generateHtpasswd() {
-    // https://www.npmjs.com/package/object-hash
-    let hash = require('object-hash');
+    const md5 = require('apache-md5');
+
+    // // Importing crypto module.
+    // const crypto = require('crypto');
+
+    // // Importing apache-md5 module.
+    // const md5 = require('apache-md5');
+
+    // // Importing apache-crypt module.
+    // const crypt = require('apache-crypt');
+
+    // // Bcrypt.
+    // const bcrypt = require('bcryptjs');
 
     let password = passwordValueRef.current.value
 
-    let htpasswd = hash(password, { algorithm: 'md5', encoding: 'base64' })
+    let htpasswd = md5(password, "")
 
     return htpasswd;
 
