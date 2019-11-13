@@ -7,19 +7,20 @@ class JapaneseModal extends Component {
 
     this.initialState = {
       japanese : {
-        input: '',
-        hebon: '',
-        katakana: '',
-        hiragana: '',
-        hankaku_ascii: '',
-        zenkaku_ascii: '',
-        hankaku_kana: '',
-        zenkaku_kana: '',
-        hankaku: '',
-        zenkaku: '',
-        normalize: '',
+        input: {label: 'Input', value: ''},
+        hebon: {label: 'Hebon', value: ''},
+        katakana: {label: 'Katakana', value: ''},
+        hiragana: {label: 'Hiragana', value: ''},
+        hankaku_ascii: {label: 'Hankaku Ascii', value: ''},
+        zenkaku_ascii: {label: 'Zenkaku Ascii', value: ''},
+        hankaku_kana: {label: 'Hankaku Kana', value: ''},
+        zenkaku_kana: {label: 'Zenkaku Kana', value: ''},
+        hankaku: {label: 'Hankaku', value: ''},
+        zenkaku: {label: 'Zenkaku', value: ''},
+        normalize: {label: 'Normalize', value: ''},
       },
       isModalShowed : false,
+      copied: false,
     }
 
     this.state = {...this.initialState}
@@ -27,31 +28,55 @@ class JapaneseModal extends Component {
     this.handleInputChanged = this.handleInputChanged.bind(this)
   }
 
+  copyToClipboard = (e) => {
+    const el = e.target
+    el.select()
+    document.execCommand("copy")
+    this.setState({copied: true})
+  }
+
   handleInputChanged(e) {
     let jaconv = require("jaconv")
     let input = e.target.value
 
-    let newJapaneseTypes = this.state
+    let newJapaneseTypes = this.state.japanese
 
-    newJapaneseTypes.japanese.input             = input
-    newJapaneseTypes.japanese.hebon             = jaconv.toHebon(input)
+    newJapaneseTypes.input.value             = input
+    newJapaneseTypes.hebon.value             = jaconv.toHebon(input)
 
-    newJapaneseTypes.japanese.katakana          = jaconv.toKatakana(input)
-    newJapaneseTypes.japanese.hiragana          = jaconv.toHiragana(input)
-    newJapaneseTypes.japanese.hankaku_ascii     = jaconv.toHanAscii(input)
-    newJapaneseTypes.japanese.zenkaku_ascii     = jaconv.toZenAscii(input)
-    newJapaneseTypes.japanese.hankaku_kana      = jaconv.toHanKana(input)
-    newJapaneseTypes.japanese.zenkaku_kana      = jaconv.toZenKana(input)
-    newJapaneseTypes.japanese.hankaku           = jaconv.toHan(input)
-    newJapaneseTypes.japanese.zenkaku           = jaconv.toZen(input)
-    newJapaneseTypes.japanese.normalize         = jaconv.normalize(input)
+    newJapaneseTypes.katakana.value          = jaconv.toKatakana(input)
+    newJapaneseTypes.hiragana.value          = jaconv.toHiragana(input)
+    newJapaneseTypes.hankaku_ascii.value     = jaconv.toHanAscii(input)
+    newJapaneseTypes.zenkaku_ascii.value     = jaconv.toZenAscii(input)
+    newJapaneseTypes.hankaku_kana.value      = jaconv.toHanKana(input)
+    newJapaneseTypes.zenkaku_kana.value      = jaconv.toZenKana(input)
+    newJapaneseTypes.hankaku.value           = jaconv.toHan(input)
+    newJapaneseTypes.zenkaku.value           = jaconv.toZen(input)
+    newJapaneseTypes.normalize.value         = jaconv.normalize(input)
 // console.log(newJapaneseTypes.japanese)
 // console.log(newJapaneseTypes)
-    this.setState(newJapaneseTypes)
+    this.setState({japanese: newJapaneseTypes})
 
   }
 
   render() {
+
+    // var outputRecordArr = Object.values(this.state.japanese)
+    // var outputRecordList = outputRecordArr.map((element, index) => {
+    //     return (
+    //                   <tr key={index}>
+    //                     <td>{element.label}
+    //                     </td>
+    //                     <td>
+    //                       <input type="text" className="form-control"
+    //                         name="japanese[{index}]"
+    //                         value={element.value}
+    //                         readOnly="readOnly"
+    //                       />
+    //                     </td>
+    //                   </tr>
+    //     )
+    // })
 
     return (
       <>
@@ -79,117 +104,130 @@ class JapaneseModal extends Component {
                           />
                         </td>
                       </tr>
+
                       <tr>
-                        <td>Hebon
+                        <td>{this.state.japanese.hebon.label}
                         </td>
                         <td>
                           <input type="text" className="form-control"
                             name="japanese[hebon]"
-                            value={this.state.japanese.hebon}
-                            disabled="disabled"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Katakana
-                        </td>
-                        <td>
-                          <input type="text" className="form-control"
-                            name="japanese[katakana]"
-                            value={this.state.japanese.katakana}
-                            disabled="disabled"
+                            value={this.state.japanese.hebon.value}
+                            readOnly="readOnly"
+                            onClick={this.copyToClipboard}
                           />
                         </td>
                       </tr>
 
                       <tr>
-                        <td>Hiragana
+                        <td>{this.state.japanese.katakana.label}
+                        </td>
+                        <td>
+                          <input type="text" className="form-control"
+                            name="japanese[katakana]"
+                            value={this.state.japanese.katakana.value}
+                            readOnly="readOnly"
+                            onClick={this.copyToClipboard}
+                          />
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>{this.state.japanese.hiragana.label}
                         </td>
                         <td>
                           <input type="text" className="form-control"
                             name="japanese[hiragana]"
-                            value={this.state.japanese.hiragana}
-                            disabled="disabled"
+                            value={this.state.japanese.hiragana.value}
+                            readOnly="readOnly"
+                            onClick={this.copyToClipboard}
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td>Hankaku Ascii
+                        <td>{this.state.japanese.hankaku_ascii.label}
                         </td>
                         <td>
                           <input type="text" className="form-control"
                             name="japanese[hankaku_ascii]"
-                            value={this.state.japanese.hankaku_ascii}
-                            disabled="disabled"
+                            value={this.state.japanese.hankaku_ascii.value}
+                            readOnly="readOnly"
+                            onClick={this.copyToClipboard}
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td>Zenkaku Ascii
+                        <td>{this.state.japanese.zenkaku_ascii.label}
                         </td>
                         <td>
                           <input type="text" className="form-control"
                             name="japanese[zenkaku_ascii]"
-                            value={this.state.japanese.zenkaku_ascii}
-                            disabled="disabled"
+                            value={this.state.japanese.zenkaku_ascii.value}
+                            readOnly="readOnly"
+                            onClick={this.copyToClipboard}
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td>Hankaku kana
+                        <td>{this.state.japanese.hankaku_kana.label}
                         </td>
                         <td>
                           <input type="text" className="form-control"
                             name="japanese[hankaku_kana]"
-                            value={this.state.japanese.hankaku_kana}
-                            disabled="disabled"
+                            value={this.state.japanese.hankaku_kana.value}
+                            readOnly="readOnly"
+                            onClick={this.copyToClipboard}
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td>Zenkaku kana
+                        <td>{this.state.japanese.zenkaku_kana.label}
                         </td>
                         <td>
                           <input type="text" className="form-control"
                             name="japanese[zenkaku_kana]"
-                            value={this.state.japanese.zenkaku_kana}
-                            disabled="disabled"
+                            value={this.state.japanese.zenkaku_kana.value}
+                            readOnly="readOnly"
+                            onClick={this.copyToClipboard}
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td>Hankaku
+                        <td>{this.state.japanese.hankaku.label}
                         </td>
                         <td>
                           <input type="text" className="form-control"
                             name="japanese[hankaku]"
-                            value={this.state.japanese.hankaku}
-                            disabled="disabled"
+                            value={this.state.japanese.hankaku.value}
+                            readOnly="readOnly"
+                            onClick={this.copyToClipboard}
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td>Zenkaku
+                        <td>{this.state.japanese.zenkaku.label}
                         </td>
                         <td>
                           <input type="text" className="form-control"
                             name="japanese[zenkaku]"
-                            value={this.state.japanese.zenkaku}
-                            disabled="disabled"
+                            value={this.state.japanese.zenkaku.value}
+                            readOnly="readOnly"
+                            onClick={this.copyToClipboard}
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td>Normalize
+                        <td>{this.state.japanese.normalize.label}
                         </td>
                         <td>
                           <input type="text" className="form-control"
                             name="japanese[normalize]"
-                            value={this.state.japanese.normalize}
-                            disabled="disabled"
+                            value={this.state.japanese.normalize.value}
+                            readOnly="readOnly"
+                            onClick={this.copyToClipboard}
                           />
                         </td>
                       </tr>
+
                     </tbody>
                     </table>
 
