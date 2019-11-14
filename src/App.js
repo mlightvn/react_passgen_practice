@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import uuidv4 from 'uuid/v4'
+
+import Header from "./Components/Layout/Header";
+import Footer from "./Components/Layout/Footer";
+
 import PasswordList from "./Components/PasswordList";
-// import PasswordForm from "./Components/PasswordForm";
 import PasswordModal from "./Components/PasswordModal";
 import JapaneseModal from "./Components/Ime/JapaneseModal";
 // import Modal from 'react-bootstrap/Modal'
@@ -109,11 +112,8 @@ function App() {
 
   return (
     <>
-      <header>
-        <nav className="nav">
-          <h1 className="container"><center>PASSWORD GENERATION</center></h1>
-        </nav>
-      </header>
+      <Header />
+
       <main className="App">
         <div className="container">
           <div className="card">
@@ -132,11 +132,6 @@ function App() {
             <div className="card-body">
               <PasswordList passwords={passwords} handleRemovePassword={handleRemovePassword} handleEditPassword={handleEditPassword} />
             </div>
-{/*
-            <div className="card-footer">
-              <PasswordForm passwords={passwords} passwordValueRef={passwordValueRef} passwordIdRef={passwordIdRef} handleAddPassword={handleAddPassword} handleGeneratePassword={handleGeneratePassword} />
-            </div>
-*/}
 
           </div>
         </div>
@@ -145,21 +140,8 @@ function App() {
         <JapaneseModal />
 
       </main>
-      <footer>
-        <div className="container">
-          <div className="row">
-            Author:&nbsp;<a href="https://coxanh.coupon-pon.net/about" target="_blank" rel="noopener noreferrer" >Nguyen Ngoc Nam</a>
-          </div>
-          <div className="row">
-            Social:&nbsp;
-            <a href="https://www.linkedin.com/in/nguyenngocnam/" target="_blank" rel="noopener noreferrer" ><i className="fab fa-linkedin"></i> LinkedIn</a>
-            &nbsp;|&nbsp;
-            <a href="http://stackoverflow.com/users/6351894/ngoc-nam" rel="noopener noreferrer" ><span className="fab fa-stack-overflow"></span> StackOverFlow</a>
-            &nbsp;|&nbsp;
-            <a href="https://github.com/namtenten" target="_blank" rel="noopener noreferrer" ><span className="fab fa-github"></span> GitHub</a>
-          </div>
-        </div>
-      </footer>
+
+      <Footer />
     </>
   );
 }
