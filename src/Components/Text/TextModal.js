@@ -16,7 +16,6 @@ class TextModal extends Component {
 
     this.state = {...this.initialState}
 
-    this.handleInputChanged = this.handleInputChanged.bind(this)
     this.handleUniqueLines = this.handleUniqueLines.bind(this)
   }
 
@@ -25,30 +24,6 @@ class TextModal extends Component {
     el.select()
     document.execCommand("copy")
     this.setState({copied: true})
-  }
-
-  handleInputChanged(e) {
-    let jaconv = require("jaconv")
-    let input = e.target.value
-
-//     let newJapaneseTypes = this.state.japanese
-
-//     newJapaneseTypes.input.value             = input
-//     newJapaneseTypes.hebon.value             = jaconv.toHebon(input)
-
-//     newJapaneseTypes.katakana.value          = jaconv.toKatakana(input)
-//     newJapaneseTypes.hiragana.value          = jaconv.toHiragana(input)
-//     newJapaneseTypes.hankaku_ascii.value     = jaconv.toHanAscii(input)
-//     newJapaneseTypes.zenkaku_ascii.value     = jaconv.toZenAscii(input)
-//     newJapaneseTypes.hankaku_kana.value      = jaconv.toHanKana(input)
-//     newJapaneseTypes.zenkaku_kana.value      = jaconv.toZenKana(input)
-//     newJapaneseTypes.hankaku.value           = jaconv.toHan(input)
-//     newJapaneseTypes.zenkaku.value           = jaconv.toZen(input)
-//     newJapaneseTypes.normalize.value         = jaconv.normalize(input)
-// // console.log(newJapaneseTypes.japanese)
-// // console.log(newJapaneseTypes)
-//     this.setState({japanese: newJapaneseTypes})
-
   }
 
   handleUniqueLines(e){
@@ -60,34 +35,16 @@ class TextModal extends Component {
 
       // Filter Arrow: https://qiita.com/piroor/items/02885998c9f76f45bfa0
       let unique_arr = arr.filter((value, index, self) => {return self.indexOf(value) === index})
-      // let unique_arr = [...new Set(arr)]
       let result = unique_arr.join('\n')
 
       let state = this.state
       state.text.output.value = result
 
-    this.setState(state)
+      this.setState(state)
     }
   }
 
   render() {
-
-    // var outputRecordArr = Object.values(this.state.japanese)
-    // var outputRecordList = outputRecordArr.map((element, index) => {
-    //     return (
-    //                   <tr key={index}>
-    //                     <td>{element.label}
-    //                     </td>
-    //                     <td>
-    //                       <input type="text" className="form-control"
-    //                         name="japanese[{index}]"
-    //                         value={element.value}
-    //                         readOnly="readOnly"
-    //                       />
-    //                     </td>
-    //                   </tr>
-    //     )
-    // })
 
     return (
       <>
@@ -111,7 +68,7 @@ class TextModal extends Component {
                         <td>
                           <textarea type="text" className="form-control"
                             name="text[input]"
-                            onChange={this.handleInputChanged}
+                            defaultValue={this.state.text.input.value}
                             rows="10"
                           >
                           </textarea>
@@ -131,7 +88,6 @@ class TextModal extends Component {
                           </textarea>
                         </td>
                       </tr>
-
 
                     </tbody>
                     </table>
