@@ -16,6 +16,7 @@ class TextModal extends Component {
 
     this.state = {...this.initialState}
 
+    this.handleToHiragana = this.handleToHiragana.bind(this)
     this.handleUniqueLines = this.handleUniqueLines.bind(this)
   }
 
@@ -24,6 +25,25 @@ class TextModal extends Component {
     el.select()
     document.execCommand("copy")
     this.setState({copied: true})
+  }
+
+  handleToHiragana(e){
+    let $inputs = document.getElementsByName("text[input]")
+    let $input = ($inputs.length > 0) ? $inputs.item(0) : null
+    if($input){
+      let jaconv = require("jaconv")
+
+      let input = $input.value
+      let arr = input.split('\n')
+
+      let unique_arr = arr.map((value, index, self) => {return jaconv.toHiragana(value) })
+      let result = unique_arr.join('\n')
+
+      let state = this.state
+      state.text.output.value = result
+
+      this.setState(state)
+    }
   }
 
   handleUniqueLines(e){
@@ -97,6 +117,7 @@ class TextModal extends Component {
               </div>
 
               <div className="modal-footer">
+                <button type="button" className="btn btn-primary" onClick={this.handleToHiragana}>ひらがなへ</button>
                 <button type="button" className="btn btn-primary" onClick={this.handleUniqueLines}>Unique Lines</button>
                 <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
