@@ -64,6 +64,13 @@ class TextModal extends Component {
     }
   }
 
+  copyToClipboard = (e) => {
+    const el = e.target
+    el.select()
+    document.execCommand("copy")
+    this.setState({copied: true})
+  }
+
   render() {
 
     return (
@@ -103,6 +110,7 @@ class TextModal extends Component {
                             name="text[output]"
                             value={this.state.text.output.value}
                             readOnly="readOnly"
+                            onClick={this.copyToClipboard}
                             rows="10"
                           >
                           </textarea>
