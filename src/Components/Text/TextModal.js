@@ -18,6 +18,8 @@ class TextModal extends Component {
 
     this.handleToHiragana = this.handleToHiragana.bind(this)
     this.handleUniqueLines = this.handleUniqueLines.bind(this)
+    this.handleReset = this.handleReset.bind(this)
+
   }
 
   copyToClipboard = (e) => {
@@ -71,10 +73,23 @@ class TextModal extends Component {
     this.setState({copied: true})
   }
 
+  handleReset = (e) => {
+    let $inputs = document.getElementById("modalText").getElementsByTagName("textarea")
+
+    Object.values($inputs).map(($element) => {
+      $element.value = ""
+
+      return null
+    })
+
+  }
+
+
   render() {
 
     return (
       <>
+        <form>
         <div className="modal" id="modalText">
           <div className="modal-dialog modal-lg">
             <div className="modal-content">
@@ -84,7 +99,7 @@ class TextModal extends Component {
                 <button type="button" className="close" data-dismiss="modal">&times;</button>
               </div>
 
-              <div className="modal-body">
+              <div className="card-body">
                 <div className="row">
                   <div className="col-md-12">
                     <table className="table">
@@ -125,14 +140,19 @@ class TextModal extends Component {
               </div>
 
               <div className="modal-footer">
-                <button type="button" className="btn btn-primary" onClick={this.handleToHiragana}>ひらがなへ</button>
-                <button type="button" className="btn btn-primary" onClick={this.handleUniqueLines}>Unique Lines</button>
-                <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" className="btn btn-outline-primary" onClick={this.handleToHiragana}>ひらがなへ</button>
+                <button type="button" className="btn btn-outline-primary" onClick={this.handleUniqueLines}>Unique Lines</button>
+
+                <button type="button" className="btn btn-outline-secondary" onClick={this.handleReset}><i className="fas fa-recycle"></i></button>
+{/*
+                <button type="button" className="btn btn-outline-danger" data-dismiss="modal"><i className="fas fa-times"></i></button>
+*/}
               </div>
 
             </div>
           </div>
         </div>
+        </form>
 
       </>
     );
