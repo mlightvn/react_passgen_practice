@@ -38,7 +38,7 @@ export default function Footer() {
 						<i className="fab fa-bitcoin"></i>
 					</div>
 					<div className="col-md-6">
-						<input className="form-control" value="3Bh3HVXKevtVQiXBG7RngcpBiJa9aTh9kW" readOnly="readOnly" />
+						<input className="form-control" value="3GQE8CxYdwbpH7nxJ5kbdZE2esZPr2mgsh" readOnly="readOnly" />
 					</div>
 				</div>
 				<div className="row">
